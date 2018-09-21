@@ -620,7 +620,6 @@ Partial Class Form1
         'ComboPagoIgual
         '
         Me.ComboPagoIgual.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.ComboPagoIgual.Enabled = False
         Me.ComboPagoIgual.FormattingEnabled = True
         Me.ComboPagoIgual.Items.AddRange(New Object() {"SI", "NO"})
         Me.ComboPagoIgual.Location = New System.Drawing.Point(165, 101)

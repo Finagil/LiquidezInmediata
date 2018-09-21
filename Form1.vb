@@ -1,6 +1,6 @@
 ﻿Public Class Form1
     Const TasaIva As Double = 0.16
-    Dim TasaVidaMes As Double = 1
+    Dim TasaVidaMes As Double = 0
     Dim TasaVidaDia As Double = TasaVidaMes / 30.4
     Dim TasaVidaAnual As Double = TasaVidaMes * 12
     Dim TasaAnual As Double = 0
@@ -12,6 +12,7 @@
 
 
     Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        TasaVidaMes = Me.ClientesTableAdapter.SacaConfiguracion("porc_seg")
         'BusquedaTasa(100000, 180, 900)
         Me.ClientesTableAdapter.Fill(Me.ProductionDataSet.Clientes)
         Me.LI_PeriodosTableAdapter.Fill(Me.ProductionDataSet.LI_Periodos)
