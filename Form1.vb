@@ -13,6 +13,8 @@
 
     Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         TasaVidaMes = Me.ClientesTableAdapter.SacaConfiguracion("porc_seg")
+        TasaVidaDia = TasaVidaMes / 30.4
+        TasaVidaAnual = TasaVidaMes * 12
         'BusquedaTasa(100000, 180, 900)
         Me.ClientesTableAdapter.Fill(Me.ProductionDataSet.Clientes)
         Me.LI_PeriodosTableAdapter.Fill(Me.ProductionDataSet.LI_Periodos)
