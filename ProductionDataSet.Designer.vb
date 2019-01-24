@@ -1572,6 +1572,12 @@ Partial Public Class ProductionDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
+        Public Function FindByAnexo(ByVal Anexo As String) As AnexosRow
+            Return CType(Me.Rows.Find(New Object() {Anexo}),AnexosRow)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
         Public Overrides Function Clone() As Global.System.Data.DataTable
             Dim cln As AnexosDataTable = CType(MyBase.Clone,AnexosDataTable)
             cln.InitVars
@@ -1610,7 +1616,9 @@ Partial Public Class ProductionDataSet
             MyBase.Columns.Add(Me.columnAnexoX)
             Me.columnImpeq = New Global.System.Data.DataColumn("Impeq", GetType(Decimal), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnImpeq)
+            Me.Constraints.Add(New Global.System.Data.UniqueConstraint("Constraint1", New Global.System.Data.DataColumn() {Me.columnAnexo}, true))
             Me.columnAnexo.AllowDBNull = false
+            Me.columnAnexo.Unique = true
             Me.columnAnexo.MaxLength = 9
             Me.columnFlcan.AllowDBNull = false
             Me.columnFlcan.MaxLength = 1
@@ -6255,7 +6263,7 @@ Namespace ProductionDataSetTableAdapters
             Me._commandCollection(0).Connection = Me.Connection
             Me._commandCollection(0).CommandText = "SELECT        Anexo, Flcan, Tipar, Cliente, SUBSTRING(Anexo, 1, 5) + '/' + SUBSTR"& _ 
                 "ING(Anexo, 6, 4) AS AnexoX, Impeq"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM            Anexos"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE        (Tipar ="& _ 
-                " N'S') AND (Cliente = @Cliente) AND (Fecha_Pago = N'') AND (Flcan = N'A')"
+                " N'L') AND (Cliente = @Cliente) AND (Fecha_Pago = N'') AND (Flcan = N'A')"
             Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(0).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Cliente", Global.System.Data.SqlDbType.NChar, 5, Global.System.Data.ParameterDirection.Input, 0, 0, "Cliente", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(1) = New Global.System.Data.SqlClient.SqlCommand()
