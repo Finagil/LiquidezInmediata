@@ -946,7 +946,7 @@
                 letra = rr.Cells("pago").Value
                 If letra.Length = 1 Then letra = "00" & letra
                 If letra.Length = 2 Then letra = "0" & letra
-                Taa.Insert(ComboAnexo.SelectedValue, letra, Fven.ToString("yyyyMMdd"), 0, "L", CDbl(rr.Cells("SaldoInsoluto").Value), CDbl(rr.Cells("capital").Value), CDbl(rr.Cells("Interes").Value), CDbl(rr.Cells("IvaInteres").Value), 0, 0, 0)
+                Taa.Insert(ComboAnexo.SelectedValue, letra, Fven.ToString("yyyyMMdd"), 0, "S", CDbl(rr.Cells("SaldoInsoluto").Value), CDbl(rr.Cells("capital").Value), CDbl(rr.Cells("Interes").Value), CDbl(rr.Cells("IvaInteres").Value), 0, 0, 0)
             Next
             ComboCliente_SelectedIndexChanged(Nothing, Nothing)
             MessageBox.Show("La tabla del contrato " & ComboAnexo.Text & " se cambio con existo.", "Anexo", MessageBoxButtons.OK, MessageBoxIcon.Information)
