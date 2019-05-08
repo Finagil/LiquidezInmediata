@@ -904,6 +904,10 @@
             MessageBox.Show("Modo Simulador Activado.", "Modo Simulador", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Exit Sub
         End If
+        If Me.LI_PlazosTableAdapter.ScalarMeses(ComboPlazo.SelectedValue) > 36 Then
+            MessageBox.Show("El plazo no puede ser mayor a 36 meses.", "Error de Tabla de Amortizacion.", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End If
+
         If MessageBox.Show("Está seguro de sobreescribir la tabla de Amortizacion", "Cambiar Contrato", MessageBoxButtons.YesNo, MessageBoxIcon.Question) <> Windows.Forms.DialogResult.Yes Then
             Exit Sub
         End If
@@ -938,7 +942,7 @@
             Dim taS As New LiquidezInmediata.ProductionDataSetTableAdapters.CreditTableAdapter
             Dim Fven As Date = GridAmortizaciones.Rows(GridAmortizaciones.Rows.Count - 1).Cells("FechaVencimiento").Value
 
-            ta.UpdateAnexo(GridAmortizaciones.Rows(0).Cells("SaldoInsoluto").Value, Me.LI_PlazosTableAdapter.ScalarMeses(ComboPlazo.SelectedValue), TasaAnual * 100, Dfechacon.Value.ToString("yyyyMMdd"), GridAmortizaciones.Rows(1).Cells("pagos").Value, DfechaVenc.Value.ToString("yyyyMMdd"), Frecuencia, GridAmortizaciones.Rows(1).Cells("dias").Value, NoPagos, TasaVidaMes,ComboAnexo.SelectedValue)
+            ta.UpdateAnexo(GridAmortizaciones.Rows(0).Cells("SaldoInsoluto").Value, Me.LI_PlazosTableAdapter.ScalarMeses(ComboPlazo.SelectedValue), TasaAnual * 100, Dfechacon.Value.ToString("yyyyMMdd"), GridAmortizaciones.Rows(1).Cells("pagos").Value, DfechaVenc.Value.ToString("yyyyMMdd"), Frecuencia, GridAmortizaciones.Rows(1).Cells("dias").Value, NoPagos, TasaVidaMes, ComboAnexo.SelectedValue)
             Dim letra As String = ""
             Taa.DeleteAnexo(ComboAnexo.SelectedValue)
             For Each rr As DataGridViewRow In GridAmortizaciones.Rows
