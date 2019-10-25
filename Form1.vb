@@ -9,16 +9,22 @@
     Dim Cat As String
     Dim ContRecur As Double = 0
     Dim FinDeMes As Boolean = False
+    Dim Args() As String
 
 
     Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        Args = Environment.GetCommandLineArgs()
         TasaVidaMes = Me.ClientesTableAdapter.SacaConfiguracion("porc_seg")
         TasaVidaDia = TasaVidaMes / 30.4
         TasaVidaAnual = TasaVidaMes * 12
         'BusquedaTasa(100000, 180, 900)
         Me.ClientesTableAdapter.Fill(Me.ProductionDataSet.Clientes)
+        If Args.Length > 1 Then
+            If Args(1).Trim.Length = 5 Then
+                Me.ClientesBindingSource.Filter = "Cliente = '" & Args(1) & "'"
+            End If
+        End If
         Me.LI_PeriodosTableAdapter.Fill(Me.ProductionDataSet.LI_Periodos)
-
         Me.LI_PlazosTableAdapter.Fill(Me.ProductionDataSet.LI_Plazos)
         FijaTasa()
         TasaAnualIva = Math.Round(TasaAnualIva, 4)
@@ -388,6 +394,9 @@
         MesSeguro = FechaAux.ToString("yyyyMM")
         If ComboPagoIgual.Text = "NO" Then
             While FechaAux < FechaFin.ToShortDateString
+                If Capital = 0 Then
+                    Exit While
+                End If
                 Cont += 1
                 If Cont = 1 Then
                     If FechaAux.AddDays(1).Day = 1 And FechaAux.Month <> 2 Then
@@ -469,6 +478,10 @@
                     PagoX = (Capital + Interes)
                 Else
                     GridAmortizaciones.Rows(Cont - 1).Cells("Capital").Value = (PagoX - Interes).ToString("N2") ' CAPITAL
+                    If Capital < GridAmortizaciones.Rows(Cont - 1).Cells("Capital").Value Then 'se termina el capital
+                        GridAmortizaciones.Rows(Cont - 1).Cells("Capital").Value = Capital.ToString("N2")
+                        PagoX = Capital + Interes
+                    End If
                     GridAmortizaciones.Rows(Cont - 1).Cells("Pagos").Value = PagoX.ToString("N2")
                 End If
 
@@ -1079,7 +1092,11 @@
             If ComboCliente.Text.Trim = "ESTEBAN GIL SERRANO" Then
                 TasaAnual = 0.2
             End If
-
+            If Args.Length > 2 Then
+                If IsNumeric(Args(2)) Then
+                    TasaAnual = CDec(Args(2)).ToString("n2")
+                End If
+            End If
             TxtTasa.Text = TasaAnual.ToString("P02")
         End If
     End Sub

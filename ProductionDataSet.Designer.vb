@@ -6263,7 +6263,8 @@ Namespace ProductionDataSetTableAdapters
             Me._commandCollection(0).Connection = Me.Connection
             Me._commandCollection(0).CommandText = "SELECT        Anexo, Flcan, Tipar, Cliente, SUBSTRING(Anexo, 1, 5) + '/' + SUBSTR"& _ 
                 "ING(Anexo, 6, 4) AS AnexoX, Impeq"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM            Anexos"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE        (Tipar ="& _ 
-                " N'L') AND (Cliente = @Cliente) AND (Fecha_Pago = N'') AND (Flcan = N'A')"
+                " N'L') AND (Cliente = @Cliente) AND (Fecha_Pago = N'') AND (Flcan = N'A' OR"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"   "& _ 
+                "                      Flcan = N'S')"
             Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(0).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Cliente", Global.System.Data.SqlDbType.NChar, 5, Global.System.Data.ParameterDirection.Input, 0, 0, "Cliente", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(1) = New Global.System.Data.SqlClient.SqlCommand()
@@ -6306,9 +6307,10 @@ Namespace ProductionDataSetTableAdapters
             Me._commandCollection(3).Connection = Me.Connection
             Me._commandCollection(3).CommandText = "UPDATE       Anexos"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SET                Impeq = @importe, Plazo = @plazo, Tipta ="& _ 
                 " N'7', Tasas = @tasa, Fechacon = @fcon, Mensu = @messualidad, Fvenc = @fven, Tip"& _ 
-                "oFrecuencia = @frecuencia, ValorFrecuencia = @valorfrec, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                     "& _ 
-                "    Amortizaciones = @Amortizaciones, idCredito = N'0', Taspen = 0, SeguroVida ="& _ 
-                " @SeguroVida, LiquidezInmediata = 1"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE        (Anexo = @Anexo)"
+                "oFrecuencia = @frecuencia, ValorFrecuencia = @valorfrec, Amortizaciones = @Amort"& _ 
+                "izaciones, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         idCredito = N'0', Taspen = 0, SeguroVida ="& _ 
+                " @SeguroVida, LiquidezInmediata = 1, Flcan = N'A'"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE        (Anexo = @Anexo)"& _ 
+                ""
             Me._commandCollection(3).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(3).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@importe", Global.System.Data.SqlDbType.[Decimal], 9, Global.System.Data.ParameterDirection.Input, 11, 2, "Impeq", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(3).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@plazo", Global.System.Data.SqlDbType.SmallInt, 2, Global.System.Data.ParameterDirection.Input, 0, 0, "Plazo", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
