@@ -955,7 +955,7 @@
             Dim taS As New LiquidezInmediata.ProductionDataSetTableAdapters.CreditTableAdapter
             Dim Fven As Date = GridAmortizaciones.Rows(GridAmortizaciones.Rows.Count - 1).Cells("FechaVencimiento").Value
 
-            ta.UpdateAnexo(GridAmortizaciones.Rows(0).Cells("SaldoInsoluto").Value, Me.LI_PlazosTableAdapter.ScalarMeses(ComboPlazo.SelectedValue), TasaAnual * 100, Dfechacon.Value.ToString("yyyyMMdd"), GridAmortizaciones.Rows(1).Cells("pagos").Value, DfechaVenc.Value.ToString("yyyyMMdd"), Frecuencia, GridAmortizaciones.Rows(1).Cells("dias").Value, NoPagos, TasaVidaMes, ComboAnexo.SelectedValue)
+            ta.UpdateAnexo(GridAmortizaciones.Rows(0).Cells("SaldoInsoluto").Value, NoPagos, TasaAnual * 100, Dfechacon.Value.ToString("yyyyMMdd"), GridAmortizaciones.Rows(1).Cells("pagos").Value, DfechaVenc.Value.ToString("yyyyMMdd"), Frecuencia, GridAmortizaciones.Rows(1).Cells("dias").Value, NoPagos, TasaVidaMes, ComboAnexo.SelectedValue)
             Dim letra As String = ""
             Taa.DeleteAnexo(ComboAnexo.SelectedValue)
             For Each rr As DataGridViewRow In GridAmortizaciones.Rows
@@ -990,70 +990,6 @@
     Private Sub CheckFinagil_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CheckFinagil.CheckedChanged
         FijaTasa()
     End Sub
-
-    ' ''Private Sub BtCargar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-    ' ''    If MessageBox.Show("Está seguro de crear el contrato", "Generar Contrato", MessageBoxButtons.YesNo, MessageBoxIcon.Question) <> Windows.Forms.DialogResult.Yes Then
-    ' ''        Exit Sub
-    ' ''    End If
-    ' ''    If GridAmortizaciones.Rows.Count > 0 Then
-    ' ''        'If CDbl(TxtMonto.Text) <> CDbl(LbImporte.Text) Then
-    ' ''        'MessageBox.Show("El importe del contrato no coincide con la tabla.", "Error de Tabla de Amortizacion.", MessageBoxButtons.OK, MessageBoxIcon.Error)
-    ' ''        'Exit Sub
-    ' ''        'End If
-    ' ''        Dim Taa As New LiquidezInmediata.ProductionDataSetTableAdapters.EdoctavTableAdapter
-    ' ''        Dim Frecuencia As String = ""
-    ' ''        Dim NoPagos As Integer = 0
-    ' ''        Dim Semanas As Integer = Me.LI_PlazosTableAdapter.ScalarSemanas(ComboPlazo.SelectedValue)
-    ' ''        Dim Catorcenas As Integer = Me.LI_PlazosTableAdapter.ScalarCatorcenas(ComboPlazo.SelectedValue)
-    ' ''        Dim Meses As Integer = Me.LI_PlazosTableAdapter.ScalarMeses(ComboPlazo.SelectedValue)
-    ' ''        Dim Quincenas As Integer = Meses * 2
-    ' ''        Select Case ComboPeriodo.Text
-    ' ''            Case "Semanal"
-    ' ''                NoPagos = Semanas
-    ' ''                Frecuencia = "DIAS"
-    ' ''            Case "Catorcenal"
-    ' ''                NoPagos = Catorcenas
-    ' ''                Frecuencia = "DIAS"
-
-    ' ''            Case "Mensual"
-    ' ''                NoPagos = Meses
-    ' ''                Frecuencia = "MESES"
-    ' ''            Case "Quincenal"
-    ' ''                NoPagos = Quincenas
-    ' ''                Frecuencia = "DIAS"
-    ' ''        End Select
-    ' ''        Dim ta As New LiquidezInmediata.ProductionDataSetTableAdapters.AnexosTableAdapter
-    ' ''        Dim taS As New LiquidezInmediata.ProductionDataSetTableAdapters.CreditTableAdapter
-    ' ''        'ta.UpdateAnexo(GridAmortizaciones.Rows(0).Cells("SaldoInsoluto").Value, Me.LI_PlazosTableAdapter.ScalarMeses(ComboPlazo.SelectedValue), TasaAnual * 100, Dfechacon.Value, GridAmortizaciones.Rows(1).Cells("pagos").Value, DfechaVenc.Value, Frecuencia, GridAmortizaciones.Rows(1).Cells("dias").Value, NoPagos, ComboAnexo.SelectedValue)
-    ' ''        Dim anexo As String = ta.UltimoContrato()
-    ' ''        Dim Solicitud As String = taS.UltimaSolicitud
-    ' ''        Dim AnexoN As Double = Mid(anexo, 2, 4)
-    ' ''        Dim SoliN As Double = Mid(Solicitud, 1, 6)
-    ' ''        AnexoN += 1
-    ' ''        SoliN += 1
-    ' ''        Dim Fven As Date = GridAmortizaciones.Rows(0).Cells("FechaVencimiento").Value
-    ' ''        anexo = "0" & AnexoN.ToString("F0") & "0001"
-    ' ''        Solicitud = "00" & SoliN.ToString("F0")
-    ' ''        taS.Insert(Solicitud, Dfechacon.Value.ToString("yyyyMMdd"), 5, "", "19990101", "A", TxtMonto.Text, Date.Now.ToString("yyyyMMdd"), Mid(anexo, 1, 5), Fven.ToString("yyyyMMdd"), 0, "", "")
-    ' ''        ta.Insertanexo(anexo, ComboCliente.SelectedValue, TxtMonto.Text, Trim(Mid(ComboPlazo.Text, 1, 2)), TasaAnual * 100, Dfechacon.Value.ToString("yyyyMMdd"), Fven.ToString("yyyyMMdd"), GridAmortizaciones.Rows(0).Cells("PagoTotal").Value, Frecuencia, ComboPeriodo.SelectedValue, NoPagos, ComboCliente.Text)
-    ' ''        Dim letra As String = ""
-    ' ''        Taa.DeleteAnexo(anexo)
-    ' ''        For Each rr As DataGridViewRow In GridAmortizaciones.Rows
-    ' ''            Fven = rr.Cells("FechaVencimiento").Value
-    ' ''            letra = rr.Cells("pago").Value
-    ' ''            If letra.Length = 1 Then letra = "00" & letra
-    ' ''            If letra.Length = 2 Then letra = "0" & letra
-    ' ''            Taa.Insert(anexo, letra, Fven.ToString("yyyyMMdd"), 0, "L", CDbl(rr.Cells("SaldoInsoluto").Value), CDbl(rr.Cells("capital").Value), CDbl(rr.Cells("Interes").Value), CDbl(rr.Cells("IvaInteres").Value), 0, 0, 0)
-    ' ''        Next
-    ' ''        Dim TAO As New LiquidezInmediata.ProductionDataSetTableAdapters.OpcionesTableAdapter
-    ' ''        TAO.Insert(anexo, 0, 0.16, 0, "N", "N")
-    ' ''        ComboCliente_SelectedIndexChanged(Nothing, Nothing)
-    ' ''        MessageBox.Show("Anexo creado " & Mid(anexo, 1, 5) & "/0001", "Anexo", MessageBoxButtons.OK, MessageBoxIcon.Information)
-    ' ''        End
-    ' ''    Else
-    ' ''        MessageBox.Show("No exsiste tabla para cargar.", "Error de Tabla de Amortizacion.", MessageBoxButtons.OK, MessageBoxIcon.Error)
-    ' ''    End If
-    ' ''End Sub
 
     Private Sub ComboCapital_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboCapital.SelectedIndexChanged
         If ComboCapital.Text = "SI" Then
