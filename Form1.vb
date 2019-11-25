@@ -931,7 +931,6 @@
             End If
             Dim Taa As New LiquidezInmediata.ProductionDataSetTableAdapters.EdoctavTableAdapter
             Dim Frecuencia As String = ""
-            Dim NoPagos As Integer = 0
             Dim Semanas As Integer = Me.LI_PlazosTableAdapter.ScalarSemanas(ComboPlazo.SelectedValue)
             Dim Catorcenas As Integer = Me.LI_PlazosTableAdapter.ScalarCatorcenas(ComboPlazo.SelectedValue)
             Dim Meses As Integer = Me.LI_PlazosTableAdapter.ScalarMeses(ComboPlazo.SelectedValue)
@@ -939,23 +938,19 @@
             'If DfechaVenc.Value.Day = 15 Then Quincenas += 1
             Select Case ComboPeriodo.Text
                 Case "Semanal"
-                    NoPagos = Semanas
                     Frecuencia = "DIAS"
                 Case "Catorcenal"
-                    NoPagos = Catorcenas
                     Frecuencia = "DIAS"
                 Case "Mensual"
-                    NoPagos = Meses
                     Frecuencia = "MESES"
                 Case "Quincenal"
-                    NoPagos = Quincenas
                     Frecuencia = "DIAS"
             End Select
             Dim ta As New LiquidezInmediata.ProductionDataSetTableAdapters.AnexosTableAdapter
             Dim taS As New LiquidezInmediata.ProductionDataSetTableAdapters.CreditTableAdapter
             Dim Fven As Date = GridAmortizaciones.Rows(GridAmortizaciones.Rows.Count - 1).Cells("FechaVencimiento").Value
 
-            ta.UpdateAnexo(GridAmortizaciones.Rows(0).Cells("SaldoInsoluto").Value, NoPagos, TasaAnual * 100, Dfechacon.Value.ToString("yyyyMMdd"), GridAmortizaciones.Rows(1).Cells("pagos").Value, DfechaVenc.Value.ToString("yyyyMMdd"), Frecuencia, GridAmortizaciones.Rows(1).Cells("dias").Value, NoPagos, TasaVidaMes, ComboAnexo.SelectedValue)
+            ta.UpdateAnexo(GridAmortizaciones.Rows(0).Cells("SaldoInsoluto").Value, GridAmortizaciones.Rows.Count, TasaAnual * 100, Dfechacon.Value.ToString("yyyyMMdd"), GridAmortizaciones.Rows(1).Cells("pagos").Value, DfechaVenc.Value.ToString("yyyyMMdd"), Frecuencia, GridAmortizaciones.Rows(1).Cells("dias").Value, GridAmortizaciones.Rows.Count, TasaVidaMes, ComboAnexo.SelectedValue)
             Dim letra As String = ""
             Taa.DeleteAnexo(ComboAnexo.SelectedValue)
             For Each rr As DataGridViewRow In GridAmortizaciones.Rows
