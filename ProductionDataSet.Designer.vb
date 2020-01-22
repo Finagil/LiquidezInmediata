@@ -6309,8 +6309,7 @@ Namespace ProductionDataSetTableAdapters
                 " N'7', Tasas = @tasa, Fechacon = @fcon, Mensu = @messualidad, Fvenc = @fven, Tip"& _ 
                 "oFrecuencia = @frecuencia, ValorFrecuencia = @valorfrec, Amortizaciones = @Amort"& _ 
                 "izaciones, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         idCredito = N'0', Taspen = 0, SeguroVida ="& _ 
-                " @SeguroVida, LiquidezInmediata = 1, Flcan = N'A'"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE        (Anexo = @Anexo)"& _ 
-                ""
+                " @SeguroVida, LiquidezInmediata = 1"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE        (Anexo = @Anexo)"
             Me._commandCollection(3).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(3).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@importe", Global.System.Data.SqlDbType.[Decimal], 9, Global.System.Data.ParameterDirection.Input, 11, 2, "Impeq", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(3).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@plazo", Global.System.Data.SqlDbType.SmallInt, 2, Global.System.Data.ParameterDirection.Input, 0, 0, "Plazo", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
