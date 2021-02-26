@@ -80,14 +80,14 @@
                 Exit Sub
             End If
         End If
-        
-         If IsNumeric(TxtMonto.Text) = False Then
+
+        If IsNumeric(TxtMonto.Text) = False Then
             MessageBox.Show("Monto Financiado No valido", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             TxtMonto.Text = 0
             TxtMonto.SelectAll()
             Exit Sub
-        ElseIf CDbl(TxtMonto.Text) < 2000 Or CDbl(TxtMonto.Text) > 1000000 Then
-            MessageBox.Show("Monto Financiado fuera de Rango valido. (de 2,000 hasta 1,000,000)", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        ElseIf CDbl(TxtMonto.Text) < 2000 Or CDbl(TxtMonto.Text) > 500000 Then
+            MessageBox.Show("Monto Financiado fuera de Rango valido. (de 2,000 hasta 500,000)", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             TxtMonto.Text = 0
             TxtMonto.SelectAll()
             Exit Sub
